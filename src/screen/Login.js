@@ -81,7 +81,7 @@ export default function Login({ navigation }) {
   // }
   
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "#956f4b", height: "100%" }}>
       <View style={{ marginHorizontal: 20 }}>
         <ScrollView>
           <View
@@ -119,7 +119,7 @@ export default function Login({ navigation }) {
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "white",
+                borderColor: "#956f4b",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -150,7 +150,7 @@ export default function Login({ navigation }) {
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "white",
+                borderColor: "#956f4b",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -201,7 +201,8 @@ export default function Login({ navigation }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "lightgrey",
+                backgroundColor: "#956f4b",
+                elevation:0.5,
                 paddingVertical: 15,
                 marginVertical: 15,
                 borderRadius: 20,
