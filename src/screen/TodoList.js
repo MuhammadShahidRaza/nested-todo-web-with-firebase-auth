@@ -12,14 +12,22 @@ export default function TodoList({ tasks, deletingTasks }) {
   const [date, setDate] = useState(new Date());
   const [todo, setTodo] = useState("");
   const [snackBar, setSnackBar] = useState(false);
+  const [subTaskIndex, setSubTaskIndex] = useState(null);
+
+  const [open, setOpen] = useState(false);
+
+  // console.log(subTaskIndex);
+
+  // const [todosSubTask, setTodosSubTask] = useState({
+  //   subtasks_: [...subtasks, { todo , id: Math.random() }],
+  // });
 
   const [subtasks, setSubtasks] = useState([]);
-  const [open, setOpen] = useState(false);
+
   function addSubTask(index) {
     if (todo) {
       setSubtasks([...subtasks, todo]);
       setTodo("");
-    
     } else {
       setSnackBar(true);
       setTimeout(() => {
@@ -42,16 +50,22 @@ export default function TodoList({ tasks, deletingTasks }) {
           return (
             <>
               <View style={{ marginVertical: 10 }} key={index}>
-                <View style={{ display: "flex", flexDirection: "row" ,alignSelf:"flex-end"}}>
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignSelf: "flex-end",
+                  }}
+                >
                   <TouchableOpacity>
-                  <View>
-                    <Text>Complete</Text>
-                  </View>
+                    <View>
+                      <Text>Complete</Text>
+                    </View>
                   </TouchableOpacity>
-                    <TouchableOpacity>
-                  <View>
-                    <Text>Pending</Text>
-                  </View>
+                  <TouchableOpacity>
+                    <View>
+                      <Text>Pending</Text>
+                    </View>
                   </TouchableOpacity>
                 </View>
                 <View
@@ -62,7 +76,7 @@ export default function TodoList({ tasks, deletingTasks }) {
                     paddingVertical: 30,
                     backgroundColor: "#a94724",
                     paddingHorizontal: 15,
-                    borderRadius:20
+                    borderRadius: 20,
                   }}
                 >
                   <View
@@ -106,8 +120,9 @@ export default function TodoList({ tasks, deletingTasks }) {
                   </View>
                 </View>
                 <TouchableOpacity
-                  onPress={(index) => {
+                  onPress={() => {
                     setOpen(!open);
+                    setSubTaskIndex(index);
                   }}
                 >
                   <View
@@ -115,8 +130,7 @@ export default function TodoList({ tasks, deletingTasks }) {
                       bottom: 10,
                       backgroundColor: "red",
                       width: 150,
-                    borderRadius:12
-,
+                      borderRadius: 12,
                       paddingVertical: 10,
                       alignItems: "center",
                       justifyContent: "center",
@@ -126,7 +140,7 @@ export default function TodoList({ tasks, deletingTasks }) {
                   </View>
                 </TouchableOpacity>
 
-                {open ? (
+                {subTaskIndex !== null && index === subTaskIndex ? (
                   <>
                     <FlatList
                       data={subtasks}
@@ -218,7 +232,7 @@ export default function TodoList({ tasks, deletingTasks }) {
 
                       <TouchableOpacity
                         onPress={() => {
-                          addSubTask(index);
+                          addSubTask();
                         }}
                       >
                         <View
@@ -244,7 +258,7 @@ export default function TodoList({ tasks, deletingTasks }) {
           );
         }}
       />
-        <SnackBar
+      <SnackBar
         visible={snackBar}
         textMessage="Please enter field to proceed"
         backgroundColor="#a83c32"
@@ -252,28 +266,3 @@ export default function TodoList({ tasks, deletingTasks }) {
     </View>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

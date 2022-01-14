@@ -9,7 +9,7 @@ import {
   Modal,
   StyleSheet,
   Pressable,
-  Platform
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TodoList from "./TodoList";
@@ -19,7 +19,7 @@ export default function Home() {
   const [modalVisible, setModalVisible] = useState(true);
   const toggleModal = () => setModalVisible(!modalVisible);
   const [addTask, setAddTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([  ]);
   const [snackBar, setSnackBar] = useState(false);
   function deletingTasks(index) {
     let copyingItems = [...tasks];
