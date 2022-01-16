@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -8,18 +8,17 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
-import { Input, Icon } from "react-native-elements";
+import { Input } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { addDoc_, auth, collection_, createUser_, db } from "../../firebase";
-const { fontScale } = Dimensions.get("screen");
-
 import {
   AntDesignIcon,
   FeatherIcon,
   MaterialCommunityIconsIcon,
-} from "../components";
+} from "../components/icons";
+const { fontScale } = Dimensions.get("screen");
 import { ENTER_ALL_FIELDS, PASSWORDS_DONT_MATCH } from "../constant/errorCodes";
-import { AUTH_ROUTE, LOGIN_ROUTE } from "../navigation/routes";
+import { LOGIN_ROUTE } from "../navigation/routes";
 import { IsNullOrEmpty } from "../utils/helpers";
 
 export default function Register({ navigation }) {
@@ -44,13 +43,11 @@ export default function Register({ navigation }) {
       try {
         await createUser_(auth, email, password).then((userCredential) => {
           const user = userCredential.user;
-
-          console.log(user);
-
+          // console.log(user);
           addDoc_(collection_(db, "users"), {
             name: name,
             phoneNumber: phoneNumber,
-            uid : user.uid
+            uid: user.uid,
           });
           // console.log(user.user.phoneNumber);
         });
@@ -67,7 +64,6 @@ export default function Register({ navigation }) {
     }
     Alert.alert(ENTER_ALL_FIELDS);
   }
-
   if (isLoading) {
     return (
       <View
@@ -86,7 +82,7 @@ export default function Register({ navigation }) {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "#664a2f", height: "100%" }}>
       <View style={{ marginHorizontal: 20 }}>
         <ScrollView>
           <View
@@ -99,7 +95,7 @@ export default function Register({ navigation }) {
           >
             <Text
               style={{
-                color: "grey",
+                color: "#956f4b",
                 fontSize: fontScale * 55,
                 fontWeight: "bold",
               }}
@@ -120,11 +116,11 @@ export default function Register({ navigation }) {
                 marginBottom: 13,
                 borderRadius: 15,
                 borderWidth: 1,
-                borderColor: "grey",
+                borderColor: "#956f4b",
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "white",
+                borderColor: "#664a2f",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -143,11 +139,11 @@ export default function Register({ navigation }) {
                 marginBottom: 13,
                 borderRadius: 15,
                 borderWidth: 1,
-                borderColor: "grey",
+                borderColor: "#956f4b",
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "white",
+                borderColor: "#664a2f",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -166,11 +162,11 @@ export default function Register({ navigation }) {
                 marginBottom: 13,
                 borderRadius: 15,
                 borderWidth: 1,
-                borderColor: "grey",
+                borderColor: "#956f4b",
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "white",
+                borderColor: "#664a2f",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -196,11 +192,11 @@ export default function Register({ navigation }) {
                 marginBottom: 13,
                 borderRadius: 15,
                 borderWidth: 1,
-                borderColor: "grey",
+                borderColor: "#956f4b",
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "white",
+                borderColor: "#664a2f",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -226,11 +222,11 @@ export default function Register({ navigation }) {
                 marginBottom: 33,
                 borderRadius: 15,
                 borderWidth: 1,
-                borderColor: "grey",
+                borderColor: "#956f4b",
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "white",
+                borderColor: "#664a2f",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -255,14 +251,14 @@ export default function Register({ navigation }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "black",
+                backgroundColor: "#543c27",
                 paddingVertical: 15,
                 borderRadius: 20,
               }}
             >
               <Text
                 style={{
-                  color: "grey",
+                  color: "#956f4b",
                   fontSize: fontScale * 18,
                   fontWeight: "bold",
                 }}
@@ -281,7 +277,7 @@ export default function Register({ navigation }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "black",
+                // backgroundColor: "black",
                 paddingVertical: 15,
                 marginVertical: 15,
                 borderRadius: 20,
@@ -289,7 +285,7 @@ export default function Register({ navigation }) {
             >
               <Text
                 style={{
-                  color: "grey",
+                  color: "#956f4b",
                   fontSize: fontScale * 18,
                   fontWeight: "bold",
                 }}

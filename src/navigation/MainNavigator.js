@@ -19,7 +19,6 @@ function MainNavigator() {
       });
     }
     IsLoggedIn();
-    console.log(loggedIn);
   }, []);
   return (
     <Stack.Navigator
@@ -27,7 +26,10 @@ function MainNavigator() {
       initialRouteName={AUTH_ROUTE}
     >
       {loggedIn ? (
-        <Stack.Screen name={APP_ROUTE} component={AppNavigator} />
+        <>
+          <Stack.Screen name={APP_ROUTE} component={AppNavigator} />
+          {/* <Stack.Screen name={AUTH_ROUTE} component={AuthNavigator} /> */}
+        </>
       ) : (
         <>
           <Stack.Screen name={AUTH_ROUTE} component={AuthNavigator} />

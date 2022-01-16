@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -8,19 +8,16 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { Input, Icon } from "react-native-elements";
+import { Input } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { auth, db, signIn_, } from "../../firebase";
-
+import { auth, signIn_ } from "../../firebase";
 const { fontScale } = Dimensions.get("screen");
-
-import { MaterialCommunityIconsIcon } from "../components";
-import { ENTER_ALL_FIELDS, PASSWORDS_DONT_MATCH } from "../constant/errorCodes";
+import { MaterialCommunityIconsIcon } from "../components/icons";
+import { ENTER_ALL_FIELDS } from "../constant/errorCodes";
 import { USER_LOGGED_IN } from "../constant/strings";
-import { APP_ROUTE, HOME_ROUTE, REGISTER_ROUTE } from "../navigation/routes";
+import { APP_ROUTE, REGISTER_ROUTE } from "../navigation/routes";
 import { IsNullOrEmpty } from "../utils/helpers";
 import { SaveItemToStorage } from "../utils/storage";
-import Home from "./Home";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -29,19 +26,14 @@ export default function Login({ navigation }) {
 
   async function signIn() {
     const listToCheck = [email, password];
-
     if (!IsNullOrEmpty(listToCheck)) {
       setIsLoading(true);
-
-
       try {
-        await signIn_(auth, email, password).then(
-          (userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-          }
-        );
-        SaveItemToStorage(USER_LOGGED_IN,"true")
+        await signIn_(auth, email, password).then((userCredential) => {
+          const user = userCredential.user;
+          // console.log(user);
+        });
+        SaveItemToStorage(USER_LOGGED_IN, "true");
         navigation.navigate(APP_ROUTE);
         setIsLoading(false);
         return;
@@ -51,10 +43,8 @@ export default function Login({ navigation }) {
         return;
       }
     }
-
     Alert.alert(ENTER_ALL_FIELDS);
   }
-
   if (isLoading) {
     return (
       <View
@@ -72,16 +62,15 @@ export default function Login({ navigation }) {
     );
   }
 
-
   // async function setUser() {
   //   const doc = await db.collection_(users).doc(user.uid).get();
   //   const userData = doc.data();
   //   console.log(userData);
 
   // }
-  
+
   return (
-    <SafeAreaView style={{ backgroundColor: "#956f4b", height: "100%" }}>
+    <SafeAreaView style={{ backgroundColor: "#664a2f", height: "100%" }}>
       <View style={{ marginHorizontal: 20 }}>
         <ScrollView>
           <View
@@ -104,7 +93,8 @@ export default function Login({ navigation }) {
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",marginBottom:30
+              justifyContent: "center",
+              marginBottom: 30,
             }}
           >
             <Input
@@ -115,11 +105,11 @@ export default function Login({ navigation }) {
                 marginBottom: 13,
                 borderRadius: 15,
                 borderWidth: 1,
-                borderColor: "grey",
+                borderColor: "#956f4b",
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "#956f4b",
+                borderColor: "#664a2f",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -136,7 +126,6 @@ export default function Login({ navigation }) {
                 />
               }
             />
-
             <Input
               placeholder="Password"
               onChangeText={setPassword}
@@ -146,11 +135,11 @@ export default function Login({ navigation }) {
                 marginBottom: 13,
                 borderRadius: 15,
                 borderWidth: 1,
-                borderColor: "grey",
+                borderColor: "#956f4b",
                 height: 64,
               }}
               inputContainerStyle={{
-                borderColor: "#956f4b",
+                borderColor: "#664a2f",
                 paddingHorizontal: 15,
 
                 paddingVertical: 10,
@@ -168,21 +157,20 @@ export default function Login({ navigation }) {
               }
             />
           </View>
-         
           <TouchableOpacity onPress={signIn}>
             <View
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "black",
+                backgroundColor: "#543c27",
                 paddingVertical: 15,
                 borderRadius: 20,
               }}
             >
               <Text
                 style={{
-                  color: "grey",
+                  color: "#956f4b",
                   fontSize: fontScale * 18,
                   fontWeight: "bold",
                 }}
@@ -201,8 +189,8 @@ export default function Login({ navigation }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "#956f4b",
-                elevation:0.5,
+                // backgroundColor: "#543c27",
+                // elevation: 0.5,
                 paddingVertical: 15,
                 marginVertical: 15,
                 borderRadius: 20,
@@ -210,7 +198,7 @@ export default function Login({ navigation }) {
             >
               <Text
                 style={{
-                  color: "grey",
+                  color: "#956f4b",
                   fontSize: fontScale * 18,
                   fontWeight: "bold",
                 }}
